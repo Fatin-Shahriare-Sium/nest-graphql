@@ -1,0 +1,24 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Product {
+  id: Int!
+  name: String
+  price: Int!
+}
+
+type Query {
+  findAllProducts: [Product!]!
+  findSingleProduct(id: Float!): Product!
+}
+
+type Mutation {
+  createProduct(data: createProductDto!): [Product!]!
+  deleteSingleProduct(id: Float!): [Product!]!
+}
+
+input createProductDto {
+  name: String!
+  price: Float!
+}

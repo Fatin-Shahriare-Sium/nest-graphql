@@ -8,17 +8,33 @@ type Product {
   price: Int!
 }
 
+type Post {
+  userID: Float!
+  title: String!
+  body: String!
+}
+
 type Query {
   findAllProducts: [Product!]!
   findSingleProduct(id: Float!): Product!
+  findAllPosts: [Post!]!
+  findOnePost(id: Float!): Post!
 }
 
 type Mutation {
   createProduct(data: createProductDto!): [Product!]!
   deleteSingleProduct(id: Float!): [Product!]!
+  createPost(data: createPostDto!): [Post!]!
+  deletePost(id: Float!): [Post!]!
 }
 
 input createProductDto {
   name: String!
   price: Float!
+}
+
+input createPostDto {
+  userId: Float!
+  title: String!
+  body: String!
 }

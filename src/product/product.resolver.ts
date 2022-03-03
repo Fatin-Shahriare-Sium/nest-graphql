@@ -21,8 +21,8 @@ export class ProductResolver {
     createProduct(@Args('data') data: createProductDto) {
         return this.productService.createProduct(data)
     }
-    @Mutation(returns=>[Product])
-    deleteSingleProduct(@Args('id') id:number){
+    @Mutation(returns => [Product])
+    deleteSingleProduct(@Args('id') id: number) {
         return this.productService.deleteSingleProduct(id)
     }
 }

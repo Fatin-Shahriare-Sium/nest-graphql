@@ -8,19 +8,23 @@ import { PostsService } from './posts.service';
 @Resolver(of => Post)
 export class PostsResolver {
     constructor(private postsService: PostsService) { }
-    @Query(returns => [Post])
+    @Query((returns) => [Post])
     async findAllPosts(): Promise<Post[]> {
         return this.postsService.getAllPosts()
     }
-    @Query(returns => Post)
-    async findOnePost(@Args('id') id: number): Promise<Post> {
+    @Query(returns => [Post])
+    async findOnePost(@Args('id') id: number): Promise<Post[]> {
         return this.postsService.findOnePost(id)
     }
 
-    @Mutation(returns => [Post])
-    //@UsePipes(new ValidationPipe())
-    async createPost(@Args('data') data: createPostDto) {
+    @Mutation((returns) => Post)
+    async createPost(@Args('data') data: createPostDto): Promise<Post> {
         console.log(data)
         return this.postsService.createPost(data)
+    }
+
+    @Mutation(returns => Post)
+    async deletePost(@Args('id') id: number):Promise<Post> {
+        return this.postsService.deletePost(id)
     }
 }

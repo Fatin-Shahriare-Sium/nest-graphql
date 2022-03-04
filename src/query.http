@@ -5,17 +5,26 @@
 
 Post http://localhost:5500/graphql
 Content-Type: application/json
-Authorization: Bearer xxx
 X-REQUEST-TYPE: GraphQL
 
-mutation($userId:Float!,$title:String!,$body:String!) {
-  createPost({userId:$userId,title:$title,body:$body}){
-      title
+mutation{
+  deletePost(id:5){
+    title
   }
 }
-  {
-    "userId":1,
-    "title":"Allah is Almighty",
-    "body":"#allahisalmighty"
-  }
+
+# query{
+#   findOnePost(id:1){
+#     title
+#   }
+# }
+
+
+# query{
+#   findAllPosts{
+#     title
+#     body
+#     id
+#   }
+# }
 

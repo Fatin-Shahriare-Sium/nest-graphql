@@ -9,7 +9,7 @@ type Product {
 }
 
 type Post {
-  userID: Float!
+  id: Float!
   title: String!
   body: String!
 }
@@ -18,14 +18,14 @@ type Query {
   findAllProducts: [Product!]!
   findSingleProduct(id: Float!): Product!
   findAllPosts: [Post!]!
-  findOnePost(id: Float!): Post!
+  findOnePost(id: Float!): [Post!]!
 }
 
 type Mutation {
   createProduct(data: createProductDto!): [Product!]!
   deleteSingleProduct(id: Float!): [Product!]!
-  createPost(data: createPostDto!): [Post!]!
-  deletePost(id: Float!): [Post!]!
+  createPost(data: createPostDto!): Post!
+  deletePost(id: Float!): Post!
 }
 
 input createProductDto {
@@ -34,7 +34,6 @@ input createProductDto {
 }
 
 input createPostDto {
-  userId: Float!
   title: String!
   body: String!
 }

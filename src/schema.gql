@@ -19,11 +19,23 @@ type createAuthorResponses {
   success: Boolean!
 }
 
+type authorLoginResponses {
+  msg: String!
+  success: Boolean!
+}
+
 type Query {
   findAllProducts: [Product!]!
   findSingleProduct(id: Float!): Product!
   findAllPosts: [Post!]!
   findOnePost(id: Float!): [Post!]!
+  loginAuthor(data: LoginAuthorDto!): authorLoginResponses!
+  getAuthorPosts(authorId: Float!): [Post!]!
+}
+
+input LoginAuthorDto {
+  email: String!
+  password: String!
 }
 
 type Mutation {
@@ -40,6 +52,7 @@ input createProductDto {
 }
 
 input createPostDto {
+  authorId: Float!
   title: String!
   body: String!
 }

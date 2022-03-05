@@ -27,6 +27,17 @@ export class PostsService {
     async createPost(data: createPostDto): Promise<Post> {
         //do the logic
         const newPostx = await this.prismaService.post.create({ data: { title: data.title, body: data.body } })
+
+        await this.prismaService.author.update({
+            where: { id: data.authorId },
+            data: {
+                posts: {
+                    connect: {
+                        id: newPostx.id
+                    }
+                }
+            }
+        })
         console.log('created Post', newPostx);
         return newPostx;
     }

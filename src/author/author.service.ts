@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Post } from '../posts/post.model';
 import { PrismaService } from '../../prisma/prisma.service';
 import { authorLoginResponses, createAuthorResponses, LoginAuthorDto } from './author.dto';
 
@@ -23,23 +24,46 @@ export class AuthorService {
         }
     }
 
-    async loginAuthor(data:LoginAuthorDto): Promise<authorLoginResponses> {
+    async loginAuthor(data: LoginAuthorDto): Promise<authorLoginResponses> {
         let authorx = await this.prismaService.author.findUnique({
-            where:{email:data.email}
+            where: { email: data.email }
         })
 
-        console.log(authorx);
-        
-        if(authorx.password==data.password){
+        if (!authorx) {
             return {
-                msg:"Successfully,login to your account",
-                success:true
+                msg: "Invalid credentials",
+                success: false
             }
-        }else{
+
+        }
+
+        console.log(authorx);
+
+        if (authorx.password == data.password) {
             return {
-                msg:"Invalid credentials",
-                success:false
+                msg: "Successfully,login to your account",
+                success: true
+            }
+        } else {
+            return {
+                msg: "Invalid credentials",
+                success: false
             }
         }
     }
+
+    async getAuthorPosts(authorId: number): Promise<Post[]> {
+        const authorAllPosts = await this.prismaService.author.findUnique({
+            where: {
+                id: authorId
+            },
+            include: {
+                posts: true
+            }
+        })
+        console.log('authorAllPosts', authorAllPosts);
+
+        return authorAllPosts.posts
+    }
+
 }

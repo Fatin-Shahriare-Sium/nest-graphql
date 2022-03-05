@@ -10,6 +10,12 @@ datasource db {
   url      ="file:./prac.db"
 }
 
+model Author{
+  id Int @id @default(autoincrement())
+  name String
+  email String @unique
+  password String
+}
 
 model Post{
   id Int @id @default(autoincrement())

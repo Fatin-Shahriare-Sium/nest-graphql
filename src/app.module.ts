@@ -7,13 +7,14 @@ import { AppService } from './app.service';
 import { ProductModule } from './product/product.module';
 import { PostsModule } from './posts/posts.module';
 import { PrismaModule } from '../prisma/prisma.module';
+import { AuthorModule } from './author/author.module';
 
 @Module({
   imports: [GraphQLModule.forRoot<ApolloDriverConfig>({
     driver: ApolloDriver,
     autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     playground: true
-  }), PrismaModule, ProductModule, PostsModule],
+  }), PrismaModule, ProductModule, PostsModule, AuthorModule],
   controllers: [AppController],
   providers: [AppService],
 })

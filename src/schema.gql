@@ -14,6 +14,11 @@ type Post {
   body: String!
 }
 
+type createAuthorResponses {
+  msg: String!
+  success: Boolean!
+}
+
 type Query {
   findAllProducts: [Product!]!
   findSingleProduct(id: Float!): Product!
@@ -26,6 +31,7 @@ type Mutation {
   deleteSingleProduct(id: Float!): [Product!]!
   createPost(data: createPostDto!): Post!
   deletePost(id: Float!): Post!
+  createAuthor(data: createAuthorDto!): createAuthorResponses!
 }
 
 input createProductDto {
@@ -36,4 +42,10 @@ input createProductDto {
 input createPostDto {
   title: String!
   body: String!
+}
+
+input createAuthorDto {
+  name: String!
+  email: String!
+  password: String!
 }

@@ -8,9 +8,12 @@ export class PostsService {
     constructor(private prismaService: PrismaService) { }
 
     async getAllPosts(): Promise<Post[]> {
-        const posts = await this.prismaService.post.findMany()
+        const posts = await this.prismaService.post.findMany({ include: { author: true } })
+        //it will map the author object
         // const posts = res.json()
         console.log(posts);
+        console.log();
+
         return posts;
     }
 
